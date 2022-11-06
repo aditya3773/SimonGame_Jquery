@@ -27,10 +27,12 @@ function clickHandler(){
          if(position==(level)){
             setTimeout(nextSequence,1000);
             position=0;
+            userClickedPattern=[];
         }
     }else{
         position=0;
-        alert("Over");
+        playSound("wrong");
+        $(document.body).addClass("game-over");
     }
     
 }
