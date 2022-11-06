@@ -3,6 +3,7 @@ var userClickedPattern=[];
 const gamePattern=[];
 let level=0;
 let gameStarted=false;
+let position=0;
 
 function animatePress(color){
     $("#" + color).addClass("pressed");
@@ -19,6 +20,18 @@ function clickHandler(){
     userClickedPattern.push($(this).attr("id"));
     playSound($(this).attr("id"));
     animatePress($(this).attr("id"));
+
+    if($(this).attr("id")==gamePattern[position]){
+        position++;
+        console.log(gamePattern);
+         if(position==(level)){
+            setTimeout(nextSequence,1000);
+            position=0;
+        }
+    }else{
+        position=0;
+        alert("Over");
+    }
     
 }
 function checkNextSequence(){
@@ -36,9 +49,11 @@ function nextSequence(){
     $("#" + randomChosenColor).fadeIn(100).fadeOut(100).fadeIn(100);
     playSound(randomChosenColor);
     gameStarted=true;
+    console.log(gamePattern);
 
 }
 
 $(document).keypress(checkNextSequence);
+
 
 $(".btn").click(clickHandler);
